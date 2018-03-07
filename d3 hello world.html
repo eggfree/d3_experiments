@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+<style>
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+.list
+{
+  height:20px;
+  border:1px solid red;
+  color:black;
+  width:20px;
+}
+.list div
+{
+  border:1px solid green;
+}
+
+</style>
+
+<script src="//d3js.org/d3.v4.min.js"></script>
+
+</head>
+<body>
+    <ul class="list"></ul>
+    lkdsjfl;adjs;lfkj
+  <div class="chart"></div>
+  <svg id="foo" width="600" height="600"></svg>
+
+ </body> 
+ <script>
+/** D3 MUST LOAD AFTER MARKUP **/
+var data = [4, 8, 15, 16, 23, 42];
+
+var x = d3.scaleLinear()
+    .domain([0, d3.max(data)])  /* create scale from 0 to maximum value */
+    .range([0, 420]);           /* map that scale to 0-420px*/
+
+d3.select(".chart")             /* pull chart handle*/
+  .selectAll("div")             /* for all divs under chart? */
+    .data(data)                 /* which are bound to dataset data */
+  .enter().append("div")        /* insert new divs if there is unbound data */
+    .style("width", d =>  x(d) + "px" ) /* my first arrow function !*/
+    .text( d =>  d);            /* set text in div to data value*/
+
+/** okay this is not too bad!!!*/
+
+/** next up a basic force directed graph **/
+/* force directed api, what are the qualities*/
+
+var dataset
+
+// refresh data function 
+function renderMe() {
+console.log(dataset)
+d3.select(".list")
+    .selectAll("li")
+      .data(dataset)
+    .enter().append("li")       /* insert new divs if there is unbound data */  
+    .text(function (d) {return d.sourceEntityValue +" >>" + d.targetEntityValue  });
+}
+ d3.csv("/testdata/edgedata.txt", function(d) {dataset = d;renderMe();}) 
+ //use call back to initiate rerender.
+
+
+/*Alright, the next step, would be to figure out the datastructure I need to plot these*/
+
+      
+
+      
+
+</script>
+</html>
