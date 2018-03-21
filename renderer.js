@@ -26,8 +26,8 @@ JE -- this is my more encapsulated test file for rendering the mm charts.
   
 
   /** performance tuning for sim **/
-  var simlength   = 100,
-      simstate    = 0
+  var  simlength   = 40,
+       simstate    = 0;
 
   /** EXTRACTED FROM DOM NODE **/
   var svg         = d3.select("#" + el_svg)
@@ -43,7 +43,8 @@ JE -- this is my more encapsulated test file for rendering the mm charts.
   var nodes,                  /* raw: all detected nodes */
       links,                  /* raw: all source target links */
       id_links,               /* a list of links with only id information, weighted by #of connecting listings.*/
-      id_nodes;       
+      id_nodes,
+      obj_nodes       
 
       /* keep simulation from running forevere*/
 
@@ -138,7 +139,7 @@ this function emphasizes the identity by scaling each id node by # listings, the
 
     function processrelationships () {
       
-      var obj_nodes    = {};
+      obj_nodes = {};
       /** make a working copy so I can remove items **/
       var new_links   = {};
       for (var i = 0; i < links.length; i++)
@@ -147,6 +148,9 @@ this function emphasizes the identity by scaling each id node by # listings, the
           obj_nodes[links[i].target] = {id:links[i].target, type:"phone", listings: []};
         obj_nodes[links[i].target].listings.push(links[i].source) /* push new lising here */
       }
+      for (var i = 0; i < nodes.length; i++)
+        if(obj_nodes[nodes[i].id])
+          obj_nodes[nodes[i].id].type = nodes[i].type ;
      
 
       for (var n in obj_nodes)  /* n here should be the attribute name*/
@@ -193,6 +197,41 @@ this function emphasizes the identity by scaling each id node by # listings, the
     for (node in obj_nodes)
         id_nodes.push(obj_nodes[node]);
   }
+  /** behaviors **/
+  function highlight(d,i)
+  {
+ if (d.type == "uid") return;
+    var thisnode = d.id
+    var nodes_to_hide = svg.selectAll("use");
+    var lines_to_hide = svg.selectAll("line");
+    var associated_nodes = obj_nodes[d.id].listings;
+    
+        nodes_to_hide.style("opacity", function (d)
+        {
+            return ((associated_nodes.indexOf(d.id)!= -1)||
+                    (d.id == thisnode)?"1":"0.2") 
+        })
+
+        lines_to_hide.style("display", function (d)
+        {
+         
+          
+          return ( ( associated_nodes.indexOf(d.source.id) != -1) &&
+                   ( d.target.id == thisnode)? "block":"none"); 
+
+        });  
+    }
+    
+    
+
+function unhighlight(d,i)
+{
+  if (d.type == "uid") return;
+   svg.selectAll("use").style("opacity","1")
+   svg.selectAll("line").style("display","block")
+}
+
+
 
 /** LISTINGS AS DOTS
     this function emphasizes the lines connecting information to 
@@ -207,7 +246,7 @@ this function emphasizes the identity by scaling each id node by # listings, the
       "email":   "symbols.svg#email"
   }
  
-
+ console.log(simlength)
   simulation = (nodes.length > 400? sim2():sim1())
 
     /* visualize links */
@@ -217,7 +256,8 @@ this function emphasizes the identity by scaling each id node by # listings, the
     .data(links)
     .enter().append("line")
     .attr("class", "line")
-    .attr("opacity", d =>  "0.1")
+    .attr("opacity", d =>  "0.5")
+    .style("display","none")
     .attr("stroke-width","0.2pt")
 
     /* create nodes */
@@ -230,6 +270,13 @@ this function emphasizes the identity by scaling each id node by # listings, the
     .attr("width","16px")
     .attr("height","18px")
     .attr("class", d => d.type)
+    /* Event handlers */
+    .on("mouseover", highlight)
+    .on("mouseout", unhighlight)
+    
+
+
+
 
   node.append("title")
     .text(function(d) { return d.entityValue; });
@@ -240,6 +287,8 @@ this function emphasizes the identity by scaling each id node by # listings, the
 
   simulation.force("link")
     .links(links);
+
+
 
   function ticked() {
 
@@ -266,21 +315,29 @@ this function emphasizes the identity by scaling each id node by # listings, the
         return d.y; });
        /* console.log(extents)*/
     simstate ++;
+     console.log(simlength > simstate)
       svg.attr("viewBox", [extents.x1 -50, 
         extents.y1-50,
         (extents.x2-extents.x1)+100,
         (extents.y2-extents.y1)+100].join (" "));
-      }
+      
 
-    if (simstate >= simlength ) {
-      /*console.log(extents)*/
+    if (simstate > simlength ) {
+      
       simulation.stop();
-      d3.select(".links").attr("style","display:block")
+      d3.selectAll("line").style("display","block")
     
     }
   }
+  }
 
+/** Renders title, %infringing etc...*/
+function render_title_metadata ()
+{
+  svg.append("text")
+  .attr("class", "title")
 
+}
 
 /** LISTINGS AS DOTS
     this function emphasizes the lines connecting information to 
@@ -297,7 +354,7 @@ this function emphasizes the identity by scaling each id node by # listings, the
  
 
   simulation =  sim4()
-
+ 
     /* visualize links */
   var link = svg.append("g")
     .attr("class", "links")
@@ -370,8 +427,8 @@ this function emphasizes the identity by scaling each id node by # listings, the
     simstate ++;
       svg.attr("viewBox", [extents.x1 -50, 
         extents.y1-50,
-        (extents.x2-extents.x1)+100,
-        (extents.y2-extents.y1)+100].join (" "));
+        Math.max(500,(extents.x2-extents.x1)+100),
+        Math.max(500,(extents.y2-extents.y1)+100)].join (" "));
       }
 
     if (simstate >= simlength ) {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="/libs/d3.js"></script>
 <style>
 h1
@@ -31,7 +32,7 @@ h3
 div
 {
   display:inline-block;
-  border:1px solid grey;
+  border-left:1px solid rgba(0,0,0,0.2);
   padding: 1rem;
 
 }
@@ -68,79 +69,78 @@ div
 
 .nodes .uid
 {
-  fill:rgba(255,128,32,0.1);
+  fill:rgba(255,180,32,0.5);
   
   /*fill:black;*/
   z-index:-1;
   
 }
 </style>
-
+<body >
 <h1> Cluster Visualization Playground </h1>
 <p> in the next day or so you will see controls to essentially change the visualization styles and some parameters. Below are three cluster examples, from maddeningly complex to relatively simple. 
   The long render times you see have to do with sum total of all nodes and lines processed for all three visualizations.
  
-  <div>
-<h3>Big Boy</h3>
-  <svg id="q1" width="500" height="400" 
- 
-  links="./testdata/bigboyedges.csv" 
-  nodes="./testdata/bigboynodes.csv" 
-  renderer="identity" 
-  preserveAspectRatio ></svg></div>
-    <div>
-
-<h3>Big Boy</h3>
-  <svg id="q8" width="500" height="400" 
- 
-  links="./testdata/bigboyedges.csv" 
-  nodes="./testdata/bigboynodes.csv" 
-  renderer="links" 
-  preserveAspectRatio ></svg></div>
-    
+<div style="cols:3;">
+ <!--   
 <div> 
-    <h3>Enoteca</h3>
-  <svg id="q5" width="500" height="400" 
+
+    <h3>EnotecaVinarus Identity</h3>
+  <svg id="q5" width="300" height="300" 
  
   links="./testdata/enotecaedges.csv" 
   nodes="./testdata/enotecanodes.csv"
   renderer="identity" 
   preserveAspectRatio ></svg></div>
 
-    
+    --><!--
     <div>
-    <h3>EnotecaVinarius</h3>
-    <svg id="q3" width="400" height="400" 
+    <h3>EnotecaVinarius Clusters </h3>
+    <svg id="q3" width="400" height="300" 
 
   links="./testdata/enotecaedges.csv" 
   nodes="./testdata/enotecanodes.csv" 
   renderer="links" 
   
+  preserveAspectRatio ></svg></div> -->
+
+<div><h3>Babie Black Cat Clusters</h3>
+    <svg id="q45" width="500" height="500" 
+   
+   links="./testdata/bigboyedges.csv" 
+  nodes="./testdata/bigboynodes.csv"  
+  renderer="identity" 
+  
   preserveAspectRatio ></svg></div>
 
+
+    <div>
+<h3>Big Boy Clusters</h3>
+  <svg id="q8" width="500" height="500" 
+ 
+   links="./testdata/bigboyedges.csv" 
+  nodes="./testdata/bigboynodes.csv" 
+    renderer="links" 
+  preserveAspectRatio ></svg></div>
+ </div>
+
+ <!-- 
   <div>
-    <h3>Babie Black Cat</h3>
-    <svg id="q2" width="400" height="400" 
+  <h3>Babie Black Cat Identity</h3>
+    <svg id="q2" width="300" height="300" 
   
   links="./testdata/babieedges.csv" 
   nodes="./testdata/babienodes.csv" 
   renderer="identity" 
   
   preserveAspectRatio ></svg></div>
-    <div>
+    <div>-->
+
+<!--
+
+    -->
 
 
-
-    <h3>Babie Black Cat</h3>
-    <svg id="q45" width="400" height="400" 
-  renderer="links" 
-  links="./testdata/babieedges.csv" 
-  nodes="./testdata/babienodes.csv" 
-  renderer="links" 
-  
-  preserveAspectRatio ></svg></div>
-
-
-
+</body>
 
 <script src="renderer.js"></script>
