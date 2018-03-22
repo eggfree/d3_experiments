@@ -249,6 +249,9 @@ function unhighlight(d,i)
  console.log(simlength)
   simulation = (nodes.length > 400? sim2():sim1())
 
+ /* Voroni overlay for interactivity- essentially to make bigger click targets*/
+  var voronoi = d3.voronoi().extent([[0,0], [width, height]]);
+
     /* visualize links */
   var link = svg.append("g")
     .attr("class", "links")
@@ -273,6 +276,8 @@ function unhighlight(d,i)
     /* Event handlers */
     .on("mouseover", highlight)
     .on("mouseout", unhighlight)
+
+  var hitPolygons = svg.append("g")   /* these are for the voroni graph overlay */  
     
 
 
@@ -291,6 +296,12 @@ function unhighlight(d,i)
 
 
   function ticked() {
+
+    /*if (graph.nodes[0].x) {
+      var polygonShapes = voronoi(graph.nodes.map(function(d) {return [d.x, d.y]})).polygons()
+      
+      polygons.attr("points", function(d, i) {return polygonShapes[i]})
+    }*/
 
     extents     = { x1:10000,
                     x2:0,
