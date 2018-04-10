@@ -259,7 +259,7 @@ function unhighlight(d,i)
     .data(links)
     .enter().append("line")
     .attr("class", "line")
-    .attr("opacity", d =>  "0.5")
+    .attr("opacity", d =>  "1")
     .style("display","none")
     .attr("stroke-width","0.2pt")
 
@@ -327,10 +327,13 @@ function unhighlight(d,i)
        /* console.log(extents)*/
     simstate ++;
      console.log(simlength > simstate)
-      svg.attr("viewBox", [extents.x1 -50, 
-        extents.y1-50,
-        (extents.x2-extents.x1)+100,
-        (extents.y2-extents.y1)+100].join (" "));
+      var w = extents.x2-extents.x1,
+          h = extents.y2-extents.y1,
+          margin = 0.55
+      svg.attr("viewBox", [extents.x1 - w * margin, 
+        extents.y1 - h * margin,
+        w + (2 * w * margin),
+        h + (2 * h * margin)].join (" "));
       
 
     if (simstate > simlength ) {

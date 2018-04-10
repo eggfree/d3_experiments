@@ -69,9 +69,9 @@ div
 
 .nodes .uid
 {
-  fill:rgba(255,180,32,0.5);
+  /*fill:rgba(128,70,16,0.5);*/
   
-  /*fill:black;*/
+  fill:black;
   z-index:-1;
   
 }
@@ -81,7 +81,7 @@ div
 <p> in the next day or so you will see controls to essentially change the visualization styles and some parameters. Below are three cluster examples, from maddeningly complex to relatively simple. 
   The long render times you see have to do with sum total of all nodes and lines processed for all three visualizations.
  
-<div style="cols:3;">
+
  <!--   
 <div> 
 
@@ -114,20 +114,12 @@ div
   preserveAspectRatio ></svg></div>
 -->
 
-    <div>
-<h3>Big Boy Clusters</h3>
-  <svg id="q8" width="500" height="500" 
- 
-   links="./testdata/bigboyedges.csv" 
-  nodes="./testdata/bigboynodes.csv" 
-    renderer="links" 
-  preserveAspectRatio ></svg></div>
- </div>
+
 
 
   <div>
-  <h3>Babie Black Cat Identity</h3>
-    <svg id="q2" width="500" height="500" 
+  <h3>Babie Black Cat </h3>
+    <svg id="q2" width="600" height="500" 
   
   links="./testdata/babieedges.csv" 
   nodes="./testdata/babienodes.csv" 
@@ -135,15 +127,23 @@ div
   
   preserveAspectRatio ></svg></div>
     <div>
-  <h3>Enoteca Identity</h3>
-    <svg id="q2" width="300" height="300" 
+  <h3>Enoteca </h3>
+    <svg id="q3" width="600" height="500" 
   
   links="./testdata/enotecaedges.csv" 
   nodes="./testdata/enotecanodes.csv" 
   renderer="links" 
   
   preserveAspectRatio ></svg></div>
-    <div>
+      <div>
+<h3>Complex Cluster, probably with bad connections</h3>
+  <svg id="q8" width="1200" height="900" 
+ 
+   links="./testdata/bigboyedges.csv" 
+  nodes="./testdata/bigboynodes.csv" 
+    renderer="links" 
+  preserveAspectRatio ></svg></div>
+ </div>
 <!--
 
     -->
