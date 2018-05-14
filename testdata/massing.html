@@ -1,0 +1,250 @@
+<html>
+<!-- MASSING AND SCALING EXAMPLE
+	 this sample markup helps to highlight how the inside massing of the 
+	 cluster details page might work
+	 -->
+
+	  <meta charset="utf-8">
+        <link href="/d3-geomap/css/d3.geomap.css" rel="stylesheet">
+        <script src="/d3-geomap/vendor/d3.geomap.dependencies.min.js"></script>
+        <script src="/d3-geomap/js/d3.geomap.min.js"></script>
+        var map = d3.geomap()
+    .geofile('/d3-geomap/topojson/world/countries.json');
+
+d3.select('#map')
+    .call(map.draw, map);
+
+<style>
+
+	html
+	{
+		font-family:Segoe UI;
+		font-size:14pt;
+		line-height:18pt;
+		font-weight:400;
+	}
+
+	*
+	{
+		box-sizing:border-box;
+	}
+
+	.haze-blue
+	{
+		background-color: rgba(70,74,80);
+	}
+
+	.light-blue
+	{
+		background-color: rgba(175,188,198);
+	}
+
+	.inf-red
+	{
+		background-color: rgba(208,2,27);
+	}
+
+
+	div.outside-sandwich {
+		padding:0.2rem;
+		border:1px solid red;
+		box-sizing:border-box;
+		display:flex;
+		flex-direction:column;
+		position:fixed;
+		top:0;
+		left:0;
+		bottom:0;
+		right:0;
+
+	}
+	.cluster-vis
+	{
+		height:24rem;
+		flex: 0 0 24rem;
+	}
+	.cluster-incident-list
+	{
+		flex: 1 1 100%;
+		display:block;
+		height:100%;
+		min-height:20px;
+		border:1px solid blue;
+
+	}
+
+
+	div.cluster-vis > *
+	{
+		border:1px solid red;
+		flex: 1 0 50%;
+	
+
+	}
+	div.connection
+	{
+		position:relative;
+	}
+	div.connection .list
+	{
+		position:absolute;
+		right:0;
+		top:0;
+		bottom:0;
+		overflow-y:auto;
+		width:16rem;
+		max-width:60%;
+		border:1px solid orange;
+	}
+
+	div.connection .list >h6
+	{
+		padding-top:0.5rem;
+		margin:0;
+		font-weight:400;
+		font-size:0.75rem;
+		color: rgba(70,74,80); /* haze blue */
+		position:relative;
+
+	}
+
+	div.connection .list >h6 >span
+	{
+		position:absolute;
+		right:0;
+		font-weight:300;
+		background-color:rgba(255,255,255,0.5);
+		color: rgba(208,2,27);
+
+	}
+
+	div.connection > *
+	{
+		padding-left:0.5rem;
+		padding-right:0.5rem;
+	}
+
+	div.flexrow
+	{
+		display:flex;
+		flex-direction:row;
+	}
+
+
+div.cluster-vis
+
+	/** basic linechart-- these could be rendered via D3 but using html instead of svg, as
+	svg may be overkill here 
+
+	
+	*/
+	.linechart
+	{
+		height:0.3rem;
+		width:100%;
+		flex-direction:row;
+		display:inline-flex;
+		flex-wrap:nowrap;
+		background-color:rgba(240,240,240);
+	}
+	.linechart:after
+	{
+		color:rgba(0,0,0,0.5);
+		flex: 1 0 100%;
+	}
+
+	.linechart .infringe
+	{
+		color:red;
+		min-width:1px;
+	}
+	.linechart .benign
+	{
+		color:rgb(64,64,64);
+		min-width:1px;
+	}
+	.linechart .unreviewed
+	{
+		color: rgb(200,200,216);
+	}
+
+	h3.section-title
+	{
+		position:absolute;
+		top:0;
+		left:0;
+	}
+
+</style>
+<!-- outside wrapper for header, middle, chart on bottom -->
+<div class="outside-sandwich flexcol">
+	<div class="cluster-header">
+		<h2> this is a massing test for cluster details </h2>
+		<!-- header content goes here -->
+	</div>	
+	<div class="cluster-vis flexrow">
+		<!-- each visualization element exists in a container i a row layou. -->
+		
+		<div class="visualization connection" >
+			<h3> Section Title </h3>
+			<!--insert cluster chart here -->
+			<div class="list connections-by-type" >
+				<p>this is where the connections list / key will go </p>	
+			</div>	
+		</div>	
+		<!-- each visualization element exists in a container i a row layou. -->
+		<div class="geo connection" >
+			<h3> Section Title </h3>
+			<div id="map" ><!-- map goes here -->
+			</div>
+
+            <!--  MARKETPLACE LIST 
+            	  this list enumerates all of the marketplaces
+            	  adjoining the map  each item in the list is
+            	  an h6 + linechart. you can group them for convenience if desired.--> 
+			<div class="list">
+
+				<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+
+								<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+
+								<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+
+								<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+			 <!-- list goes here --> </div>
+
+		</div>
+
+	</div>
+	<div class="cluster-incident-list">
+		<!-- incident list content goes here -->
+	</div>
+</div>
