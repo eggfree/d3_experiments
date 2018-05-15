@@ -96,23 +96,23 @@ h3
 
 	.haze-blue
 	{
-		background-color: rgba(70,74,80);
+		background-color: rgb(70,74,80);
 	}
 
 	.light-blue
 	{
-		background-color: rgba(175,188,198);
+		background-color: rgb(175,188,198);
 	}
 
 	.inf-red
 	{
-		background-color: rgba(208,2,27);
+		background-color: rgb(208,2,27);
 	}
 
 
 	div.outside-sandwich {
-		padding:0.2rem;
-		border:1px solid red;
+	
+		/*border:1px solid red;*/
 		box-sizing:border-box;
 		display:flex;
 		flex-direction:column;
@@ -125,8 +125,8 @@ h3
 	}
 	.cluster-vis
 	{
-		height:24rem;
-		flex: 0 0 24rem;
+		height:20rem;
+		flex: 0 0 20rem;
 	}
 	.cluster-incident-list
 	{
@@ -134,15 +134,17 @@ h3
 		display:block;
 		height:100%;
 		min-height:20px;
-		border:1px solid blue;
+		/*border:1px solid blue;*/
 
 	}
 
 
 	div.cluster-vis > *
 	{
-		border:1px solid red;
+		/*border:1px solid red;*/
 		flex: 1 0 50%;
+		border-top:1px solid rgba(0,0,0,0.1);
+		border-bottom:1px solid rgba(0,0,0,0.1);
 	
 
 	}
@@ -151,46 +153,73 @@ h3
 		position:relative;
 		display:flex;
 		flex-flow:row;
+		overflow:hidden;
+		border-right:1px solid rgba(0,0,0,0.1);
+		height:20rem;
+	
 
+
+	}
+	div.connection h3
+	{
+		position:absolute;
+		top:0;
+		left:0;
+		right:40px;
+		height:30px;
+		font-weight: 200;
+		overflow:hidden;
+		font-size:1.1rem;
+		color: rgba(70,74,80);
+		line-height:2rem;
+		padding:0 0.5rem;
 	}
 	div.connection .list
 	{
-		right:0;
-		top:0;
-		bottom:0;
-		overflow-y:auto;
-		width:12rem;
-		flex:0 0 12rem;
-		border:1px solid orange;
-		font-size:.8rem;
 		
+		margin-top:30px;
+		overflow-y:auto;
+		max-width:14rem;
+		max-height:100%;
+		flex:1 0 10rem;
+		/*border:1px solid orange;*/
+		font-size:.7rem;
+
 	}
 
 	div.connection .list >h6
 	{
-		padding-top:0.5rem;
 		margin:0;
+		padding: 0.3rem 0.5rem 0.1rem 0.5rem;
 		font-weight:400;
-		font-size:0.75rem;
-		color: rgba(70,74,80); /* haze blue */
+		font-size:0.7rem;
+		color: rgb(70,74,80); /* haze blue */
 		position:relative;
+		line-height:1rem;
+		padding-right:2rem;
 
 	}
 
 	div.connection .list >h6 >span
 	{
 		position:absolute;
+		display:block;
 		right:0;
+		top:0.3rem;
 		font-weight:300;
-		background-color:rgba(255,255,255,0.5);
+		background-color:rgba(255,255,255,0.9);
 		color: rgba(208,2,27);
+		padding: 0 0.5rem;
+		
 
 	}
 
-
-	div.connection svg
+	div.connection > img,
+	div.connection > svg
 	{
-		flex: 0 1 auto;
+		flex: 1 2 auto;
+		width:50%;
+		padding:0 0.5rem;
 	}
 
 	div.flexrow
@@ -199,22 +228,25 @@ h3
 		flex-direction:row;
 	}
 
-
-div.cluster-vis
+	
+	 
 
 	/** basic linechart-- these could be rendered via D3 but using html instead of svg, as
 	svg may be overkill here 
-
+	
 	
 	*/
+
 	.linechart
 	{
-		height:0.3rem;
-		width:100%;
+		height:6px;
+		margin:0 0.5rem;
 		flex-direction:row;
-		display:inline-flex;
+		display:flex;
 		flex-wrap:nowrap;
-		background-color:rgba(240,240,240);
+		background-color:rgba(0,0,0,0.1);
+		margin-bottom: 0.2rem;
+		width:auto;
 	}
 	.linechart:after
 	{
@@ -237,12 +269,91 @@ div.cluster-vis
 		color: rgb(200,200,216);
 	}
 
-	h3.section-title
+	
+
+	/** map section */
+	.connections-by-type ul
 	{
-		position:absolute;
-		top:0;
-		left:0;
+		border-top:1px solid rgba(0,0,0,0.1);
+		padding: 0.2rem 0rem 0.2rem 1.5rem ;
+		position:relative;
+		margin:0;
+
 	}
+
+.connections-by-type ul:first-child
+{
+	border-top:none;
+}
+	.connections-by-type ul >li
+	{
+		list-style: none;
+		margin:0;
+		padding:0 0.5rem;
+		cursor:pointer;
+	}
+	.connections-by-type ul >li:hover
+	{
+		background-color:rgba(0,0,0,0.05);
+	}
+
+	/** icons for connections key*/
+	.connections-by-type .links:before
+	{
+		content:"";
+		position:absolute;
+		top:0.5rem;
+		left:0.3rem;
+		background: url('images/sym/link.svg') ;
+		background-repeat:no-repeat;
+		background-size: 1rem;
+		display:block;
+		height:1rem;
+		width:1rem;
+	}
+
+		.connections-by-type .sellers:before
+	{
+		content:"";
+		position:absolute;
+		top:0.5rem;
+		left:0.3rem;
+		background: url('images/sym/seller.svg') ;
+		background-repeat:no-repeat;
+		background-size: 0.8rem;
+		display:block;
+		height:1rem;
+		width:1rem;
+	}
+			.connections-by-type .phone:before
+	{
+		content:"";
+		position:absolute;
+		top:0.5rem;
+		left:0.3rem;
+		background: url('images/sym/phone.svg') ;
+		background-repeat:no-repeat;
+		background-size: 0.8rem;
+		display:block;
+		height:1rem;
+		width:1rem;
+	}
+
+				.connections-by-type .emails:before
+	{
+		content:"";
+		position:absolute;
+		top:0.5rem;
+		left:0.3rem;
+		background: url('images/sym/email.svg') ;
+		background-repeat:no-repeat;
+		background-size: 0.8rem;
+		display:block;
+		height:1rem;
+		width:1rem;
+	}
+
+
 
 </style>
 <!-- outside wrapper for header, middle, chart on bottom -->
@@ -255,9 +366,9 @@ div.cluster-vis
 		<!-- each visualization element exists in a container i a row layou. -->
 		
 		<div class="visualization connection" >
-			<h3> Section Title </h3>
+			<h3>2 Sellers linked by 1 phone and 1 email:</h3>
 			<!--insert cluster chart here -->
-			 <svg id="q3" width="30rem" height="35rem" 
+			 <svg id="q3" width="24rem" height="24rem" 
   
   links="./testdata/babieedges.csv" 
   nodes="./testdata/babienodes.csv" 
@@ -265,9 +376,10 @@ div.cluster-vis
   
   preserveAspectRatio ></svg>
 			<div class="list connections-by-type" >
-				<div class="links">
-					40 links
-				</div>	
+				
+				<ul class="links">
+					<li>40 links</li>
+				</ul>	
 				<ul class="sellers">
 					<li>enotecavinarisu</li>
 					<li>enotecavinarisu</li>
@@ -282,19 +394,20 @@ div.cluster-vis
 					<li>14164564756</li>
 					
 				</ul>	
+			
 			</div>	
 		</div>	
 		<!-- each visualization element exists in a container i a row layou. -->
 		<div class="geo connection" >
 			<h3> Section Title </h3>
-			<div id="map" ><!-- map goes here -->
-			</div>
+			<img src="images/sym/FPO worldmap.svg"/>
 
             <!--  MARKETPLACE LIST 
             	  this list enumerates all of the marketplaces
             	  adjoining the map  each item in the list is
             	  an h6 + linechart. you can group them for convenience if desired.--> 
 			<div class="list">
+				
 
 				<!-- INDIVIDUAL MARKETPLACE ENTRY -->
 				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
@@ -331,8 +444,61 @@ div.cluster-vis
 					<div style="width:10%;"class="beingn light-blue"></div>
 				</div>
 				<!-- END ENTRY -->
-			 <!-- list goes here --> </div>
+												<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
 
+								<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+
+								<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+												<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+
+								<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+
+								<!-- INDIVIDUAL MARKETPLACE ENTRY -->
+				<h6>Marketplace name and locale<span class="infringing">23</span></h6>
+				<div class="linechart">
+					<div style="width:40%;" class="infringe inf-red"></div>
+					<div style="width:20%;" class="unreviewed haze-blue"></div>
+					<div style="width:10%;"class="beingn light-blue"></div>
+				</div>
+				<!-- END ENTRY -->
+
+			 <!-- list goes here --> </div>
+			
 		</div>
 
 	</div>
