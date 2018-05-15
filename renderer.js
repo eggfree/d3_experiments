@@ -329,7 +329,7 @@ function unhighlight(d,i)
      console.log(simlength > simstate)
       var w = extents.x2-extents.x1,
           h = extents.y2-extents.y1,
-          margin = 0.55
+          margin = 0.10
       svg.attr("viewBox", [extents.x1 - w * margin, 
         extents.y1 - h * margin,
         w + (2 * w * margin),

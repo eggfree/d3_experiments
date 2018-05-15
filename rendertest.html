@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="/libs/d3.js"></script>
+
 <style>
 h1
 {
@@ -118,7 +119,7 @@ div
 
 
   <div>
-  <h3>Babie Black Cat </h3>
+  <h3 onmousedown="toggleit()" >Babie Black Cat </h3>
     <svg id="q2" width="600" height="500" 
   
   links="./testdata/babieedges.csv" 
@@ -150,5 +151,9 @@ div
 
 
 </body>
-
+<script>
+  function toggleit()
+  {
+  document.getElementById('q2').style.width='100px';
+}</script>
 <script src="renderer.js"></script>

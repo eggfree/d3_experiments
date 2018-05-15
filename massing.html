@@ -4,16 +4,81 @@
 	 cluster details page might work
 	 -->
 
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="/libs/d3.js"></script>
+
+<style>
+h1
+{
+  font-family:"segoe UI";
+   font-size: 30pt;
+   font-weight: 300;
+   line-height:30pt;
+   margin:0;
+   padding: 0;
+   padding-bottom:1rem;
+   letter-spacing: -0.01rem;
+}
+p{
+  font: 10pt/13pt georgia;
+  color:rgba(0,0,0,0.5);
+  padding:0.5rem 0 ;
+  width:40rem;
+}
+h3
+
+{
+   font-family:"segoe UI";
+   font-size: 18pt;
+   font-weight: 300;
+   margin:0;
+   padding:0;
+}
+
+.links, .nodes
+{
+  /*display:none;*/
+}
+.links line {
+  stroke: rgb(128,128,128);
+  stroke-opacity: 0.5;
+  
+  z-index:-2;
+
+
+}
+
+.nodes .email
+{
+  z-index:2;
+  fill:rgb(32, 128, 32);
+}
+
+.nodes .phone
+{
+  z-index:2;
+  fill:rgb(32, 32, 128);
+}
+
+.nodes .name
+{
+  z-index:2;
+  fill:rgb(0, 32, 64);
+}
+
+.nodes .uid
+{
+  /*fill:rgba(128,70,16,0.5);*/
+  
+  fill:black;
+  z-index:-1;
+  
+}
+
+</style>	 
+
 	  <meta charset="utf-8">
-        <link href="/d3-geomap/css/d3.geomap.css" rel="stylesheet">
-        <script src="/d3-geomap/vendor/d3.geomap.dependencies.min.js"></script>
-        <script src="/d3-geomap/js/d3.geomap.min.js"></script>
-        var map = d3.geomap()
-    .geofile('/d3-geomap/topojson/world/countries.json');
-
-d3.select('#map')
-    .call(map.draw, map);
-
+       
 <style>
 
 	html
@@ -84,17 +149,21 @@ d3.select('#map')
 	div.connection
 	{
 		position:relative;
+		display:flex;
+		flex-flow:row;
+
 	}
 	div.connection .list
 	{
-		position:absolute;
 		right:0;
 		top:0;
 		bottom:0;
 		overflow-y:auto;
-		width:16rem;
-		max-width:60%;
+		width:12rem;
+		flex:0 0 12rem;
 		border:1px solid orange;
+		font-size:.8rem;
+		
 	}
 
 	div.connection .list >h6
@@ -118,10 +187,10 @@ d3.select('#map')
 
 	}
 
-	div.connection > *
+
+	div.connection svg
 	{
-		padding-left:0.5rem;
-		padding-right:0.5rem;
+		flex: 0 1 auto;
 	}
 
 	div.flexrow
@@ -188,8 +257,31 @@ div.cluster-vis
 		<div class="visualization connection" >
 			<h3> Section Title </h3>
 			<!--insert cluster chart here -->
+			 <svg id="q3" width="30rem" height="35rem" 
+  
+  links="./testdata/babieedges.csv" 
+  nodes="./testdata/babienodes.csv" 
+  renderer="links" 
+  
+  preserveAspectRatio ></svg>
 			<div class="list connections-by-type" >
-				<p>this is where the connections list / key will go </p>	
+				<div class="links">
+					40 links
+				</div>	
+				<ul class="sellers">
+					<li>enotecavinarisu</li>
+					<li>enotecavinarisu</li>
+				</ul>	
+				<ul class="emails">
+					<li>foo@bar.com</li>
+					<li>goo@star.com</li>
+
+				</ul>	
+				<ul class="phone">
+					<li>14155578130</li>
+					<li>14164564756</li>
+					
+				</ul>	
 			</div>	
 		</div>	
 		<!-- each visualization element exists in a container i a row layou. -->
@@ -248,3 +340,4 @@ div.cluster-vis
 		<!-- incident list content goes here -->
 	</div>
 </div>
+<script src="/renderer.js"></script>
